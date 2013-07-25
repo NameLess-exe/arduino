@@ -15,6 +15,8 @@ const int RIGHT_MOTOR_REVERSE_PIN = 5; //Right motor reverse pin
 
 const int COLLISION_THRESHOLD = 20; //Distance in cm to raise collision detection
 
+const int PIEZO_PIN = 6;
+
 const int DELAY = 100; //Main loop delay, in ms
 
 /*********************
@@ -29,7 +31,7 @@ void setup(){
   pinMode(LEFT_MOTOR_PIN, OUTPUT);
   pinMode(RIGHT_MOTOR_PIN, OUTPUT);
   pinMode(LEFT_MOTOR_REVERSE_PIN, OUTPUT);
-  pinMode(RIGHT_MOTOR_REVERSE_PIN, OUTPUT);
+  pinMode(LEFT_MOTOR_REVERSE_PIN, OUTPUT);
   
   //Open serial port for debugging with 57600 baud
   Serial.begin(57600);
@@ -50,7 +52,9 @@ void loop() {
       Serial.println("Collision, rotating, distance: " + String(distance) + "cm");
       motor(1, -1); //Left motor forward, right reverse
       delay(DELAY);
+      analogWrite(piezoPin, distance * 40 + 800);
     } while (distance != 0 && distance < 20);
+    analogWrite(piezoPin, 0);
   }
   delay(DELAY);
 }
