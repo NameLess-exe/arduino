@@ -1,0 +1,1 @@
+<?php echo round(json_decode(file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=" . (isset($_GET["q"]) ? $_GET["q"] : "hamilton,nz")))->main->temp) - 272; ?>
