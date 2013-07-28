@@ -1,6 +1,3 @@
-#include <NewPing.h>
-
-
 /*********************
 CONFIGURATION BEGIN
 *********************/
@@ -13,13 +10,13 @@ const int LEFT_MOTOR_REVERSE_PIN = 3; //Left motor reverse pin
 const int RIGHT_MOTOR_PIN = 4; //Right motor forward pin
 const int RIGHT_MOTOR_REVERSE_PIN = 5; //Right motor reverse pin
 
-const int COLLISION_THRESHOLD = 20; //Distance in cm to raise collision detection
-
 const int DELAY = 100; //Main loop delay, in ms
 
 /*********************
 CONFIGURATION END
 *********************/
+
+boolean isLine = false;
 
 //Setup sonar
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
@@ -29,7 +26,7 @@ void setup(){
   pinMode(LEFT_MOTOR_PIN, OUTPUT);
   pinMode(RIGHT_MOTOR_PIN, OUTPUT);
   pinMode(LEFT_MOTOR_REVERSE_PIN, OUTPUT);
-  pinMode(RIGHT_MOTOR_REVERSE_PIN, OUTPUT);
+  pinMode(LEFT_MOTOR_REVERSE_PIN, OUTPUT);
   
   //Open serial port for debugging with 57600 baud
   Serial.begin(57600);
