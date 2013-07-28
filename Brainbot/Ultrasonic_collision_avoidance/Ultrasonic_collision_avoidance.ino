@@ -36,24 +36,23 @@ void setup(){
 }
 
 void loop() {
-//  //Ping ultrasound
-//  int distance = ping();
-//  Serial.println("Distance: " + String(distance) + "cm");
-//  
-//  //No obstacle ahead, full speed ahead!
-//  if (distance > COLLISION_THRESHOLD || distance == 0){
-//    motor(1, 1); //Both motors forward
-//  }
-//  else { //Obstacle within threshold, rotate
-//    do { //Keep rotating left until cleared obstacle
-//      distance = ping();
-//      Serial.println("Collision, rotating, distance: " + String(distance) + "cm");
-//      motor(1, -1); //Left motor forward, right reverse
-//      delay(DELAY);
-//    } while (distance != 0 && distance < 20);
-//  }
-//  delay(DELAY);
-motor(1, 1);
+  //Ping ultrasound
+  int distance = ping();
+  Serial.println("Distance: " + String(distance) + "cm");
+  
+  //No obstacle ahead, full speed ahead!
+  if (distance > COLLISION_THRESHOLD || distance == 0){
+    motor(1, 1); //Both motors forward
+  }
+  else { //Obstacle within threshold, rotate
+    do { //Keep rotating left until cleared obstacle
+      distance = ping();
+      Serial.println("Collision, rotating, distance: " + String(distance) + "cm");
+      motor(1, -1); //Left motor forward, right reverse
+      delay(DELAY);
+    } while (distance != 0 && distance < 20);
+  }
+  delay(DELAY);
 }
 
 /*
@@ -72,11 +71,11 @@ motor(1, 1);
 * Rotate right - motor(1, -1)
 */
 void motor(int left, int right){
-  digitalWrite(LEFT_MOTOR_PIN, left = 1 ? HIGH : LOW);
-  digitalWrite(LEFT_MOTOR_REVERSE_PIN, left = -1 ? HIGH : LOW);
+  digitalWrite(LEFT_MOTOR_PIN, left >= 1 ? HIGH : LOW);
+  digitalWrite(LEFT_MOTOR_REVERSE_PIN, left <= -1 ? HIGH : LOW);
   
-  digitalWrite(RIGHT_MOTOR_PIN, right = 1 ? HIGH : LOW);
-  digitalWrite(RIGHT_MOTOR_REVERSE_PIN, right = -1 ? HIGH : LOW);
+  digitalWrite(RIGHT_MOTOR_PIN, right >= 1 ? HIGH : LOW);
+  digitalWrite(RIGHT_MOTOR_REVERSE_PIN, right <=-1 ? HIGH : LOW);
 }
 
 //Ping ultrasound, returns distance in cm
